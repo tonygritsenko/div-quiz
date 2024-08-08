@@ -1,0 +1,9 @@
+@import './normalize.css';
+@import './reset.css';
+@import './fonts.css';
+
+.container {
+  max-width: 906px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
