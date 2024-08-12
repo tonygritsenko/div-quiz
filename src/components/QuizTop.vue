@@ -1,6 +1,9 @@
 <script setup>
-const { quizQuestionsLength, showResults, numberOfCorrectAnswers } =
-  defineProps(["quizQuestionsLength", "showResults", "numberOfCorrectAnswers"]);
+const props = defineProps({
+  quizQuestionsLength: Number,
+  showResults: Boolean,
+  numberOfCorrectAnswers: Number,
+});
 </script>
 
 <template>
@@ -9,7 +12,10 @@ const { quizQuestionsLength, showResults, numberOfCorrectAnswers } =
       <h2 class="quiz__title" v-if="!showResults">Тестирование</h2>
 
       <div
-        v-if="showResults && numberOfCorrectAnswers === quizQuestionsLength"
+        v-if="
+          showResults &&
+          numberOfCorrectAnswers === quizQuestionsLength
+        "
         class="quiz__top-wrapper"
       >
         <span class="quiz__title">Поздравляем!</span>

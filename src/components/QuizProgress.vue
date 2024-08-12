@@ -1,21 +1,24 @@
 <script setup>
-const { questionStatus, barPercentage, quizQuestionsLength } = defineProps([
-  "questionStatus",
-  "barPercentage",
-  "quizQuestionsLength",
-]);
+const props = defineProps({
+  questionStatus: Number,
+  barPercentage: String,
+  quizQuestionsLength: Number,
+});
 </script>
 
 <template>
-  <div class="progress">    
+  <div class="progress">
     <div class="bar">
-      <span class="status" :style="{ paddingLeft: barPercentage}">{{ questionStatus }}</span>
+      <span class="status" :style="{ paddingLeft: barPercentage }">{{
+        questionStatus
+      }}</span>
       <div class="completion" :style="{ width: barPercentage }"></div>
     </div>
     <div class="progress__bottom">
-      <span>0</span><span>
-      {{ quizQuestionsLength }}
-    </span>
+      <span>0</span
+      ><span>
+        {{ quizQuestionsLength }}
+      </span>
     </div>
   </div>
 </template>
@@ -47,7 +50,7 @@ const { questionStatus, barPercentage, quizQuestionsLength } = defineProps([
 
 .completion {
   height: 100%;
-  background-color: #3300FF;
+  background-color: #3300ff;
   border-radius: 99px;
 }
 </style>

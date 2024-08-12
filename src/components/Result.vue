@@ -1,20 +1,15 @@
 <script setup>
-const {
-  shuffledQuestions,
-  quizQuestionsLength,
-  numberOfCorrectAnswers,
-  userAnswers,
-} = defineProps([
-  "shuffledQuestions",
-  "quizQuestionsLength",
-  "numberOfCorrectAnswers",
-  "userAnswers",
-]);
+const props = defineProps({
+  shuffledQuestions: Array,
+  quizQuestionsLength: Number,
+  numberOfCorrectAnswers: Number,
+  userAnswers: Array,
+});
 
 const isCorrect = (index) => {
-  const options = shuffledQuestions[index].options;
+  const options = props.shuffledQuestions[index].options;
   for (const element of options) {
-    if (element.isCorrect && element.text === userAnswers[index]) {
+    if (element.isCorrect && element.text === props.userAnswers[index]) {
       return true;
     }
   }

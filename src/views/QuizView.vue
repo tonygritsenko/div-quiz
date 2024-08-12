@@ -11,10 +11,6 @@ const currentQuestionIndex = ref(0);
 const numberOfCorrectAnswers = ref(0);
 const userAnswers = ref([]);
 
-const questionStatus = computed(
-  () => currentQuestionIndex.value
-);
-
 const barPercentage = computed(
   () => `${(currentQuestionIndex.value / quiz.length) * 100}%`
 );
@@ -76,7 +72,7 @@ const shuffledQuestions = shuffleQuestions(quiz);
         />
         <QuizProgress
           v-if="!showResults"
-          :questionStatus="questionStatus"
+          :questionStatus="currentQuestionIndex"
           :barPercentage="barPercentage"
           :quizQuestionsLength="quiz.length"
         />
