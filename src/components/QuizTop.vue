@@ -1,20 +1,18 @@
 <script setup>
-const props = defineProps({
-  quizQuestionsLength: Number,
-  showResults: Boolean,
-  numberOfCorrectAnswers: Number,
-});
+import { useQuizStore } from '../store/quizStore';
+
+const store = useQuizStore();
 </script>
 
 <template>
   <div class="quiz__top">
     <div class="quiz__top-content">
-      <h2 class="quiz__title" v-if="!showResults">Тестирование</h2>
+      <h2 class="quiz__title" v-if="!store.showResults">Тестирование</h2>
 
       <div
         v-if="
-          showResults &&
-          numberOfCorrectAnswers === quizQuestionsLength
+          store.showResults &&
+          store.numberOfCorrectAnswers === store.quiz.length
         "
         class="quiz__top-wrapper"
       >
@@ -26,21 +24,21 @@ const props = defineProps({
       </div>
       <div
         v-if="
-          showResults &&
-          numberOfCorrectAnswers > 0 &&
-          numberOfCorrectAnswers !== quizQuestionsLength
+          store.showResults &&
+          store.numberOfCorrectAnswers > 0 &&
+          store.numberOfCorrectAnswers !== store.quiz.length
         "
         class="quiz__top-wrapper"
       >
         <span class="quiz__title">Хороший результат!</span>
         <p class="quiz__top-text">
           Вы&nbsp;ответили правильно на&nbsp;{{
-            numberOfCorrectAnswers
+            store.numberOfCorrectAnswers
           }}&nbsp;вопросов. Так держать!
         </p>
       </div>
       <div
-        v-if="showResults && numberOfCorrectAnswers === 0"
+        v-if="store.showResults && store.numberOfCorrectAnswers === 0"
         class="quiz__top-wrapper"
       >
         <span class="quiz__title">Упс :(</span>

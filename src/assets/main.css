@@ -2,6 +2,10 @@
 @import './reset.css';
 @import './fonts.css';
 
+section {
+  padding: 80px 0;
+}
+
 .container {
   max-width: 906px;
   padding: 0 10px;

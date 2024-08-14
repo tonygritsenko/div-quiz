@@ -1,23 +1,21 @@
 <script setup>
-const props = defineProps({
-  questionStatus: Number,
-  barPercentage: String,
-  quizQuestionsLength: Number,
-});
+import { useQuizStore } from '../store/quizStore';
+
+const store = useQuizStore();
 </script>
 
 <template>
   <div class="progress">
     <div class="bar">
-      <span class="status" :style="{ paddingLeft: barPercentage }">{{
-        questionStatus
+      <span class="status" :style="{ paddingLeft: store.barPercentage }">{{
+       store.currentQuestionIndex
       }}</span>
-      <div class="completion" :style="{ width: barPercentage }"></div>
+      <div class="completion" :style="{ width: store.barPercentage }"></div>
     </div>
     <div class="progress__bottom">
       <span>0</span
       ><span>
-        {{ quizQuestionsLength }}
+        {{ store.quiz.length }}
       </span>
     </div>
   </div>
