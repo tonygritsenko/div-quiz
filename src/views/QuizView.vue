@@ -3,8 +3,8 @@ import { useQuizStore } from "../store/quizStore";
 import Question from "../components/Question.vue";
 import QuizTop from "../components/QuizTop.vue";
 import QuizProgress from "@/components/QuizProgress.vue";
-const store = useQuizStore();
 
+const store = useQuizStore();
 </script>
 
 <template>

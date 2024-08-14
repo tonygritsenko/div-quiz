@@ -1,25 +1,11 @@
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 import quiz from "../data/quiz.json";
-
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-
-  return array;
-};
-
-const shuffleQuestions = (questions) => {
-  shuffleArray(questions).forEach((question) => {
-    question.options = shuffleArray(question.options);
-  });
-
-  return questions;
-};
+import { shuffleQuestions } from "../utils/shuffleQuestions";
 
 const shuffledQuiz = shuffleQuestions(quiz);
+
+const time = 700;
 
 export const useQuizStore = defineStore({
   id: "quizStore",
@@ -57,7 +43,7 @@ export const useQuizStore = defineStore({
 
         this.currentQuestionIndex++;
         this.selectedOption = null;
-      }, 1000);
+      }, time);
     },
   },
 });

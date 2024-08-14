@@ -1,48 +1,13 @@
 <script setup>
 import { useQuizStore } from "../store/quizStore";
-import { useRouter } from "vue-router";
 import QuizTop from "../components/QuizTop.vue";
-import { onMounted, onBeforeUnmount } from 'vue';
+import { redirect } from "../utils/redirect";
+import { resetResults } from "../utils/resetResults";
+import { isCorrect } from "../utils/isCorrect";
 
 const store = useQuizStore();
-const router = useRouter();
-const quiz = store.quiz;
 
-const isCorrect = (index) => {
-  const options = quiz[index].options;
-  for (const element of options) {
-    if (element.isCorrect && element.text === store.userAnswers[index]) {
-      return true;
-    }
-  }
-};
-
-const resetResults = () => {
-  store.showResults = false;
-  store.currentQuestionIndex = 0;
-  store.numberOfCorrectAnswers = 0;
-  store.userAnswers = [];
-};
-
-const redirectOnReload = () => {
-  sessionStorage.setItem('shouldRedirect', 'true');
-};
-
-const checkRedirect = () => {
-  if (sessionStorage.getItem('shouldRedirect')) {
-    sessionStorage.removeItem('shouldRedirect');
-    router.push("/");
-  }
-};
-
-onMounted(() => {
-  window.addEventListener('beforeunload', redirectOnReload);
-  checkRedirect();
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('beforeunload', redirectOnReload);
-});
+redirect();
 </script>
 
 <template>
@@ -53,7 +18,7 @@ onBeforeUnmount(() => {
           <QuizTop />
           <ul class="results__list">
             <li
-              v-for="(question, index) in quiz"
+              v-for="(question, index) in store.quiz"
               :key="index"
               :class="{
                 'results__item--correct': isCorrect(index),
