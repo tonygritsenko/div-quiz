@@ -1,5 +1,6 @@
 <script setup>
-import { useQuizStore } from '../store/quizStore';
+import { useQuizStore } from "../store/quizStore";
+import { wordEnding } from "../utils/wordEnding";
 
 const store = useQuizStore();
 </script>
@@ -34,7 +35,13 @@ const store = useQuizStore();
         <p class="quiz__top-text">
           Вы&nbsp;ответили правильно на&nbsp;{{
             store.numberOfCorrectAnswers
-          }}&nbsp;вопросов. Так держать!
+          }}&nbsp;{{
+            wordEnding(store.numberOfCorrectAnswers, [
+              "вопрос",
+              "вопроса",
+              "вопросов",
+            ])
+          }}. Так держать!
         </p>
       </div>
       <div
