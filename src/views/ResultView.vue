@@ -79,6 +79,7 @@ redirect();
   }
 
   &__link {
+    position: relative;
     align-self: center;
     padding: 16px;
     max-width: 220px;
@@ -89,9 +90,26 @@ redirect();
     line-height: 22px;
     color: #ffffff;
     background-color: #3300ff;
-    border: none;
-    border-radius: 10px;
+    border-radius: 10px;   
     cursor: pointer;
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: -4%;
+      left: -4%;
+      width: 108%;
+      height: 108%;
+      background-color: #3300ff;
+      border-radius: 10px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+    }
+
+    &:hover:not(:focus-visible):after {
+      opacity: 1;
+    }
   }
 }
 </style>

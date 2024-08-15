@@ -1,5 +1,6 @@
 <script setup>
 import { useQuizStore } from "../store/quizStore";
+import { toggleTimeline } from "../gsap/toggleTimeline";
 
 const props = defineProps({
   question: Object,
@@ -23,7 +24,10 @@ const store = useQuizStore();
           type="radio"
           :value="option.text"
           v-model="store.selectedOption"
-          @click="store.onOptionSelected(option.isCorrect, option.text)"
+          @click="
+            store.onOptionSelected(option.isCorrect, option.text);
+            toggleTimeline();
+          "
         />
         <label
           :for="`option-${question.id}-${option.id}`"
