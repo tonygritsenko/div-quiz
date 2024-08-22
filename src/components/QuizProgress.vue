@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useQuizStore } from "../store/quizStore";
 import { onMounted, onUnmounted, ref } from "vue";
 import { tl } from "../gsap/toggleTimeline";
@@ -9,35 +9,25 @@ gsap.registerPlugin(MotionPathPlugin);
 
 const store = useQuizStore();
 
-const main = ref();
+const main = ref<string>("");
 
-let ctx;
+let ctx: gsap.Context | undefined;
 
 onMounted(() => {
   ctx = gsap.context(() => {
-    const boxes = gsap.utils.toArray(".num");
-    const statusElement = document.querySelector(".status");
-    tl.value = gsap
-      .timeline({
-        paused: true,
-      })
-      .to(statusElement, {
-        duration: 1,
-        rotationY: 360,
-      })
-      .to(boxes[0], {
-        duration: 1,
-        motionPath: {
-          path: [
-            { x: 0, y: 0, z: 360 },
-            { x: 0, y: 48, z: 0 },
-          ],
-        },
-        rotationX: 360,
-      })
-      .to(
-        boxes[1],
-        {
+    const boxes = gsap.utils.toArray<HTMLElement>(".num");
+    const statusElement = document.querySelector<HTMLElement>(".status");
+
+    if (statusElement) {
+      tl.value = gsap
+        .timeline({
+          paused: true,
+        })
+        .to(statusElement, {
+          duration: 1,
+          rotationY: 360,
+        })
+        .to(boxes[0], {
           duration: 1,
           motionPath: {
             path: [
@@ -46,14 +36,27 @@ onMounted(() => {
             ],
           },
           rotationX: 360,
-        },
-        "<"
-      );
+        })
+        .to(
+          boxes[1],
+          {
+            duration: 1,
+            motionPath: {
+              path: [
+                { x: 0, y: 0, z: 360 },
+                { x: 0, y: 48, z: 0 },
+              ],
+            },
+            rotationX: 360,
+          },
+          "<"
+        );
+    }
   }, main.value);
 });
 
 onUnmounted(() => {
-  ctx.revert();
+  ctx?.revert();
 });
 </script>
 

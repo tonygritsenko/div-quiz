@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 import quiz from "../data/quiz.json";
 import { shuffleQuestions } from "../utils/shuffleQuestions";
+import { QuizStoreState } from "../types/interfaces";
 
 const shuffledQuiz = shuffleQuestions(quiz);
 
@@ -10,7 +11,7 @@ const time = 700;
 export const useQuizStore = defineStore({
   id: "quizStore",
 
-  state: () => ({
+  state: (): QuizStoreState => ({
     router: useRouter(),
     showResults: false,
     currentQuestionIndex: 0,
@@ -26,7 +27,7 @@ export const useQuizStore = defineStore({
   },
 
   actions: {
-    onOptionSelected(isCorrect, selectedAnswer) {
+    onOptionSelected(isCorrect: boolean, selectedAnswer: string): void {
       this.selectedOption = selectedAnswer;
 
       setTimeout(() => {

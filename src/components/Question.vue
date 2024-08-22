@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { useQuizStore } from "../store/quizStore";
 import { toggleTimeline } from "../gsap/toggleTimeline";
+import { Question } from "../types/interfaces";
 
-const props = defineProps({
-  question: Object,
-});
+defineProps<{
+  question: Question;
+}>();
 
 const store = useQuizStore();
 </script>

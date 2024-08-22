@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { useQuizStore } from "../store/quizStore";
 import { wordEnding } from "../utils/wordEnding";
 

@@ -1,8 +1,8 @@
-<script setup>
+<script lang="ts" setup>
 import { useQuizStore } from "../store/quizStore";
 import Question from "../components/Question.vue";
 import QuizTop from "../components/QuizTop.vue";
-import QuizProgress from "@/components/QuizProgress.vue";
+import QuizProgress from "../components/QuizProgress.vue";
 
 const store = useQuizStore();
 </script>
